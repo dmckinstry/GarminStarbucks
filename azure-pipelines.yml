@@ -1,0 +1,29 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- script: |
+    echo Add other tasks to build, test, and deploy your project.
+    echo See https://aka.ms/yaml
+  displayName: 'Run a multi-line script'
+
+# https://developer.garmin.com/downloads/connect-iq/sdks/connectiq-sdk-win-3.1.6-2019-10-23-2de4665c6.zip
+- script: |
+    echo Downloading SDK
+    curl https://developer.garmin.com/downloads/connect-iq/sdks/connectiq-sdk-win-3.1.6-2019-10-23-2de4665c6.zip > sdk.zip
+    sudo apt install zip
+    unzip sdk.zip -d ~/sdk
+    export PATH=$PATH:~/sdk/bin
+  displayName: Install Connect IQ SDK
+
+- script: |
+    monkeyc [-d <arg>] [-f <arg>] [-o <arg>] [-y <arg>]
+  displayName: Compile Widget
