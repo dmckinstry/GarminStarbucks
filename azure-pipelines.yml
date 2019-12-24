@@ -11,6 +11,7 @@ pool:
 
 steps:
 - task: DownloadSecureFile@1
+  name: secureFile
   inputs:
     secureFile: 'developer_key.der'
   displayName: Retrieve certificate
@@ -25,5 +26,5 @@ steps:
   displayName: Install Connect IQ SDK
 
 - script: |
-    monkeyc [-d <arg>] [-f <arg>] [-o <arg>] [-y <arg>]
+    ~/sdk/bin/monkeyc -d Venu -f monkey.jungle -o $(Build.StagingDirectory) -y $(secureFile.secureFilePath)
   displayName: Compile Widget
