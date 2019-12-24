@@ -23,6 +23,7 @@ steps:
     # sudo apt install zip
     unzip sdk.zip -d ~/sdk
     export PATH=$PATH:~/sdk/bin
+    chmod +x ~/sdk/bin/monkeyc
   displayName: Install Connect IQ SDK
 
 - script: |
